@@ -11,8 +11,8 @@ module.exports = {
   },
   connect(selectorFn, ...modelNames){
     const reaction = (updatedModelName) => {
-      const selectedData = selectorFn(modelNames.reduce((data, name) => {
-        data[name] = registry[name] ? registry[name].modelInterface.getDataSnapshot() : null;
+      const selectedData = selectorFn(modelNames.reduce((data, modelName) => {
+        data[modelName + 'Data'] = registry[modelName] ? registry[modelName].modelInterface.getDataSnapshot() : null;
         return data;
       }, {}));
       EventEmitter.notify(`${updatedModelName}Updated`, selectedData)
