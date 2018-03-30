@@ -7,11 +7,11 @@ class TodoDataModel extends BaseDataModel{
     Registry.connect(this.selector.bind(this), 'TodoDomainModel', 'OtherTodoDomainModel');
   }
 
-  selector({TodoDomainModel, OtherTodoDomainModel}) {
+  selector({TodoDomainModelData, OtherTodoDomainModelData}) {
     /**
      * all data from linked models goes here in Data arg
      */
-    this._data = {TodoDomainModel, OtherTodoDomainModel};
+    this._data = {TodoDomainModelData, OtherTodoDomainModelData};
     return data;
   }
 
