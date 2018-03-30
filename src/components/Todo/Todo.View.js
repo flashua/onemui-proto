@@ -32,7 +32,7 @@ class TodoView extends BaseView {
     super.hide();
   }
 
-  render({TodoDomainModel, OtherTodoDomainModel}){
+  render({TodoDomainModelData, OtherTodoDomainModelData}){
     /**
      * render view
      */
