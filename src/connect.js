@@ -5,11 +5,12 @@ module.exports = {
   register(modelInterface){
     registry[modelInterface.name] = {
       modelInterface,
-      reaction: () => {}
+      reactions: []
     };
     return () => registry[modelInterface.name] = null
   },
   connect(selectorFn, ...modelNames){
+    
     const reaction = (updatedModelName) => {
       const selectedData = selectorFn(modelNames.reduce((data, modelName) => {
         data[modelName + 'Data'] = registry[modelName] ? registry[modelName].modelInterface.getDataSnapshot() : null;
@@ -19,12 +20,12 @@ module.exports = {
     };
 
     modelNames.forEach(name => {
-      registry[name].reaction = reaction
+      registry[name].reactions.push(reaction)
     });
 
     reaction()
   },
   update(modelName){
-    registry[modelName].reaction(modelName)
+    registry[modelName].reactions.forEach(reaction => reaction(modelName))
   }
 };
